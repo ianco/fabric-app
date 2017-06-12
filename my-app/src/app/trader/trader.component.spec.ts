@@ -7,29 +7,29 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Configuration } from '../configuration';
 import { DataService } from '../data.service';
-import { CommodityComponent } from './Commodity.component';
-import {CommodityService} from './Commodity.service';
+import { TraderComponent } from './trader.component';
+import {TraderService} from './trader.service';
 
-describe('CommodityComponent', () => {
-  let component: CommodityComponent;
-  let fixture: ComponentFixture<CommodityComponent>;
+describe('TraderComponent', () => {
+  let component: TraderComponent;
+  let fixture: ComponentFixture<TraderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommodityComponent ],
+      declarations: [ TraderComponent ],
 imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule
   ],
-providers: [CommodityService,DataService,Configuration]
+providers: [TraderService,DataService,Configuration]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommodityComponent);
+    fixture = TestBed.createComponent(TraderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

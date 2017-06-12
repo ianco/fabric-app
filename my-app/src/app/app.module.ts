@@ -10,15 +10,15 @@ import { HomeComponent } from './home/home.component';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 
 import { CommodityComponent } from './Commodity/Commodity.component';
+import { TraderComponent } from './trader/trader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 		HomeComponent,
     // TransactionComponent,
-    
-    CommodityComponent
-		
+    CommodityComponent,
+    TraderComponent
   ],
   imports: [
     BrowserModule,
