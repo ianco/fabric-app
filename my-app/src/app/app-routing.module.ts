@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TraderComponent } from './trader/trader.component';
 import { CommodityComponent } from './Commodity/Commodity.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
     // { path: 'transaction', component: TransactionComponent },
     {path: '', component: HomeComponent},
 		{ path: 'Trader', component: TraderComponent},
 		{ path: 'Commodity', component: CommodityComponent},
+		{ path: 'Transaction', component: TransactionComponent},
 		{path: '**', redirectTo:''}
 ];
 

@@ -1,0 +1,28 @@
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  <h1 id='assetName'>Transactions</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-responsive table-striped">
+        <thead class="thead">
+          <tr class="thead-cols">
+                <th class="info">transactionId</th>
+                <th class="info">commodity</th>
+                <th class="info">newOwner</th>
+                <th class="info">timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of allAssets">
+                <td>{{asset.transactionId}}</td>
+                <td>{{asset.commodity}}</td>
+                <td>{{asset.newOwner}}</td>
+                <td>{{asset.timestamp}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
