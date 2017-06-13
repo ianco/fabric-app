@@ -10,8 +10,7 @@ export class CommodityService {
 
 	
 		private NAMESPACE: string = 'Commodity';
-	
-
+		private TRADE_NAMESPACE: string = 'Trade';
 
 
     constructor(private dataService: DataService<Commodity>) {
@@ -31,6 +30,10 @@ export class CommodityService {
 
     public updateAsset(id: any, itemToUpdate: any): Observable<Commodity> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
+    }
+
+    public tradeAsset(id: any, itemToUpdate: any): Observable<Commodity> {
+      return this.dataService.trade(this.TRADE_NAMESPACE, id, itemToUpdate);
     }
 
     public deleteAsset(id: any): Observable<Commodity> {

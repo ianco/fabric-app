@@ -53,6 +53,16 @@ export class DataService<Type> {
           .catch(this.handleError);
     }
 
+    public trade(ns: string, id: string, itemToUpdate: Type): Observable<Type> {
+        console.log('Trade ' + ns);
+        console.log('what is the id?', id);
+        console.log('what is the updated item?', itemToUpdate);
+        console.log('what is the updated item?', JSON.stringify(itemToUpdate));
+        return this.http.post(`${this.actionUrl}${ns}`, itemToUpdate)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
     public delete(ns: string, id: string): Observable<Type> {
         console.log('Delete ' + ns);
 

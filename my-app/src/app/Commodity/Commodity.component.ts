@@ -17,42 +17,19 @@ export class CommodityComponent implements OnInit {
   private currentId;
 	private errorMessage;
 
-  
       tradingSymbol = new FormControl("", Validators.required);
-  
       description = new FormControl("", Validators.required);
-  
       mainExchange = new FormControl("", Validators.required);
-  
       quantity = new FormControl("", Validators.required);
-  
       owner = new FormControl("", Validators.required);
-  
-
 
   constructor(private serviceCommodity:CommodityService, fb: FormBuilder) {
     this.myForm = fb.group({
-    
-        
           tradingSymbol:this.tradingSymbol,
-        
-    
-        
           description:this.description,
-        
-    
-        
           mainExchange:this.mainExchange,
-        
-    
-        
           quantity:this.quantity,
-        
-    
-        
           owner:this.owner
-        
-    
     });
   };
 
@@ -85,54 +62,21 @@ export class CommodityComponent implements OnInit {
   }
 
   addAsset(form: any): Promise<any> {
-
     this.asset = {
       $class: "org.example.mynetwork.Commodity",
-      
-        
           "tradingSymbol":this.tradingSymbol.value,
-        
-      
-        
           "description":this.description.value,
-        
-      
-        
           "mainExchange":this.mainExchange.value,
-        
-      
-        
           "quantity":this.quantity.value,
-        
-      
-        
           "owner":this.owner.value
-        
-      
     };
 
     this.myForm.setValue({
-      
-        
           "tradingSymbol":null,
-        
-      
-        
           "description":null,
-        
-      
-        
           "mainExchange":null,
-        
-      
-        
           "quantity":null,
-        
-      
-        
           "owner":null
-        
-      
     });
 
     return this.serviceCommodity.addAsset(this.asset)
@@ -140,27 +84,11 @@ export class CommodityComponent implements OnInit {
     .then(() => {
 			this.errorMessage = null;
       this.myForm.setValue({
-      
-        
           "tradingSymbol":null,
-        
-      
-        
           "description":null,
-        
-      
-        
           "mainExchange":null,
-        
-      
-        
           "quantity":null,
-        
-      
-        
           "owner":null 
-        
-      
       });
     })
     .catch((error) => {
@@ -173,39 +101,13 @@ export class CommodityComponent implements OnInit {
     });
   }
 
-
    updateAsset(form: any): Promise<any> {
     this.asset = {
       $class: "org.example.mynetwork.Commodity",
-      
-        
-          
-        
-    
-        
-          
             "description":this.description.value,
-          
-        
-    
-        
-          
             "mainExchange":this.mainExchange.value,
-          
-        
-    
-        
-          
             "quantity":this.quantity.value,
-          
-        
-    
-        
-          
             "owner":this.owner.value
-          
-        
-    
     };
 
     return this.serviceCommodity.updateAsset(form.get("tradingSymbol").value,this.asset)
@@ -226,9 +128,32 @@ export class CommodityComponent implements OnInit {
     });
   }
 
+   tradeAsset(form: any): Promise<any> {
+    this.asset = {
+      $class: "org.example.mynetwork.Trade",
+            "commodity":this.tradingSymbol.value,
+            "newOwner":this.owner.value
+    };
+
+    return this.serviceCommodity.tradeAsset(form.get("tradingSymbol").value,this.asset)
+		.toPromise()
+		.then(() => {
+			this.errorMessage = null;
+		})
+		.catch((error) => {
+            if(error == 'Server error'){
+				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+			}
+            else if(error == '404 - Not Found'){
+				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+			}
+			else{
+				this.errorMessage = error;
+			}
+    });
+  }
 
   deleteAsset(): Promise<any> {
-
     return this.serviceCommodity.deleteAsset(this.currentId)
 		.toPromise()
 		.then(() => {
@@ -252,37 +177,17 @@ export class CommodityComponent implements OnInit {
   }
 
   getForm(id: any): Promise<any>{
-
     return this.serviceCommodity.getAsset(id)
     .toPromise()
     .then((result) => {
 			this.errorMessage = null;
       let formObject = {
-        
-          
             "tradingSymbol":null,
-          
-        
-          
             "description":null,
-          
-        
-          
             "mainExchange":null,
-          
-        
-          
             "quantity":null,
-          
-        
-          
             "owner":null 
-          
-        
       };
-
-
-
       
         if(result.tradingSymbol){
           formObject.tradingSymbol = result.tradingSymbol;
@@ -314,9 +219,7 @@ export class CommodityComponent implements OnInit {
           formObject.owner = null;
         }
       
-
       this.myForm.setValue(formObject);
-
     })
     .catch((error) => {
         if(error == 'Server error'){
@@ -329,33 +232,15 @@ export class CommodityComponent implements OnInit {
             this.errorMessage = error;
         }
     });
-
   }
 
   resetForm(): void{
     this.myForm.setValue({
-      
-        
           "tradingSymbol":null,
-        
-      
-        
           "description":null,
-        
-      
-        
           "mainExchange":null,
-        
-      
-        
           "quantity":null,
-        
-      
-        
           "owner":null 
-        
-      
       });
   }
-
 }

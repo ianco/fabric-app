@@ -7,57 +7,30 @@
       </div>
       <form [formGroup]="myForm">
         <div class="modal-body">
-
-
-          
             <div class="form-group text-left">
               <label for="tradingSymbol">tradingSymbol</label>
-
-              
                 <input formControlName="tradingSymbol" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="description">description</label>
-
-              
                 <input formControlName="description" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="mainExchange">mainExchange</label>
-
-              
                 <input formControlName="mainExchange" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="quantity">quantity</label>
-
-              
                 <input formControlName="quantity" type="number" step='any' class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="owner">owner</label>
-
-              
                   <textarea formControlName="owner" class="form-control" rows="3"></textarea>
-
-              
-
             </div>
-          
-
-
         </div>
         <div class="modal-footer">
           <button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
@@ -68,9 +41,6 @@
   </div>
 </div>
 
-
-
-
 <div class="modal fade" id="updateAssetModal" tabindex="-1" role="dialog" aria-labelledby="updateAssetModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -80,56 +50,30 @@
       </div>
       <form [formGroup]="myForm">
         <div class="modal-body">
-
-
-          
             <div class="form-group text-left">
               <label for="tradingSymbol">tradingSymbol</label>
-
-              
                 <input [ngModel]="tradingSymbol"formControlName="tradingSymbol" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="description">description</label>
-
-              
                 <input [ngModel]="description"formControlName="description" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="mainExchange">mainExchange</label>
-
-              
                 <input [ngModel]="mainExchange"formControlName="mainExchange" type="text" class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="quantity">quantity</label>
-
-              
                 <input [ngModel]="quantity" formControlName="quantity" type="number" step='any' class="form-control">
-              
-
             </div>
           
             <div class="form-group text-left">
               <label for="owner">owner</label>
-
-              
                   <textarea [ngModel]="owner" formControlName="owner" class="form-control" rows="3"></textarea>
-              
-
             </div>
-          
-
-
         </div>
         <div class="modal-footer">
           <button (click)="updateAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
@@ -140,7 +84,33 @@
   </div>
 </div>
 
-
+<div class="modal fade" id="tradeAssetModal" tabindex="-1" role="dialog" aria-labelledby="tradeAssetModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="tradeAssetModalLabel">Trade Asset</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+            <div class="form-group text-left">
+              <label for="tradingSymbol">commodity</label>
+                <input [ngModel]="tradingSymbol"formControlName="tradingSymbol" type="text" class="form-control">
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="owner">newOwner</label>
+                  <textarea [ngModel]="owner" formControlName="owner" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="tradeAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="deleteAssetModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssetModalLabel">
   <div class="modal-dialog" role="document">
@@ -162,16 +132,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
 <div class="container">
 	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
 		<strong>Error:</strong> {{errorMessage}}
@@ -188,37 +148,24 @@
       <table class="table table-bordered table-responsive table-striped">
         <thead class="thead">
           <tr class="thead-cols">
-            
                 <th class="info">tradingSymbol</th>
-            
                 <th class="info">description</th>
-            
                 <th class="info">mainExchange</th>
-            
                 <th class="info">quantity</th>
-            
                 <th class="info">owner</th>
-            
               <th class="info">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let asset of allAssets">
-
-            
                 <td>{{asset.tradingSymbol}}</td>
-            
                 <td>{{asset.description}}</td>
-            
                 <td>{{asset.mainExchange}}</td>
-            
                 <td>{{asset.quantity}}</td>
-            
                 <td>{{asset.owner}}</td>
-            
             <td>
               <button (click)="getForm(asset.tradingSymbol);" type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAssetModal">Update Asset</button>
-
+              <button (click)="getForm(asset.tradingSymbol);" type="button" class="btn btn-success" data-toggle="modal" data-target="#tradeAssetModal">Trade Asset</button>
               <button (click)="setId(asset.tradingSymbol);" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAssetModal">Delete Asset</button>
             </td>
           </tr>
