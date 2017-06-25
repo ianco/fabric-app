@@ -11,7 +11,11 @@ cd "${DIR}"/composer
 docker-compose -f docker-compose.yml kill && docker-compose -f docker-compose.yml down
 
 # remove the local state
-#rm -rf ~/.composer-connection-profiles/hlfv1
-#rm -f ~/.hfc-key-store/*
+rm -rf ~/.composer-connection-profiles/hlfv1
+rm -rf ~/.composer-connection-profiles/default
+rm -f ~/.hfc-key-store/*
+
+# remove chaincode docker images
+docker rmi $(docker images dev-* -q)
 
 # Your system is now clean
